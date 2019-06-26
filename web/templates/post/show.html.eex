@@ -12,7 +12,7 @@
         <span class="meta-sep">&bull;</span>
         <li>
           <%= for category <- @post.categories do %>
-            <a href="/posts?category=<%= category %>" rel="category tag" class="post-category post-category-<%= category %>"><%= category %></a>
+            <a href="/tag/<%= category %>" rel="category tag" class="post-category post-category-<%= category %>"><%= category %></a>
           <% end %>
         </li>
         <span class="meta-sep">&bull;</span>

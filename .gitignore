@@ -6,6 +6,7 @@
 /node_modules
 *.log*
 priv/static
+priv/posts
 
 # Test artifacts
 cover

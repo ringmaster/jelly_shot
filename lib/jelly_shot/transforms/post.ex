@@ -13,11 +13,18 @@ defmodule JellyShot.Post do
     end
   end
 
+  defp cat_errors({severity, line, error}, acc) do
+    acc <> "Error at line #{line}: #{error}\n"
+  end
+
   defp do_transform(file) do
     {:ok, matter, body} = split_frontmatter(file)
     case Earmark.as_html(body, %Earmark.Options{pedantic: false, sanitize: true}) do
       {:ok, html, _} -> {:ok, into_post(file, matter, html)}
-      {:error, html, _} -> {:ok, into_post(file, matter, html)}
+      {:error, html, error_messages} -> 
+        errors = error_messages
+        |> Enum.reduce(html, &cat_errors/2)
+        {:ok, into_post(file, matter, html <> "<!--" <> errors <> "-->")}
     end
   end
 

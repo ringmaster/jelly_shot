@@ -1,6 +1,8 @@
 alias JellyShot.PageRepository, as: Page
 alias JellyShot.ErrorView
 
+require Logger
+
 defmodule JellyShot.PageController do
   use JellyShot.Web, :controller
 
@@ -9,7 +11,16 @@ defmodule JellyShot.PageController do
       {:ok, page} ->
         render conn, "show.html", page: page, name: file_name
       :not_found ->
-        conn |> put_status(:not_found) |> render(ErrorView, "404.html")
+        conn 
+        |> put_status(:not_found) 
+        |> put_view(ErrorView) |> render("404.html")
     end
+  end
+
+  def fourohfour(conn, _) do
+    conn
+    |> put_status(:not_found)
+    |> put_view(ErrorView)
+    |> render("404.html")
   end
 end

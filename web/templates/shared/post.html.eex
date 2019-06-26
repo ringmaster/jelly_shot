@@ -14,7 +14,7 @@
 
       in
       <%= for category <- @post.categories do %>
-        <a href="/posts?category=<%= category %>" class="post-category post-category-<%= category %>"><%= category %></a>
+        <a href="/tag/<%= category %>" class="post-category post-category-<%= category %>"><%= category %></a>
       <% end %>
     </p>
   </header>

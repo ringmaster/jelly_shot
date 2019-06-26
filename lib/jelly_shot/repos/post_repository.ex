@@ -14,6 +14,11 @@ defmodule JellyShot.PostRepository do
     source
       |> get_initial_state
       |> Enum.each(fn(item) ->
+        item = if Enum.count(item.categories) == 0 do
+          Map.put(item, :categories, ["untagged"])
+        else
+          item
+        end
         upsert_by_post(item)
       end)
 

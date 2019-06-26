@@ -23,7 +23,17 @@ defmodule JellyShot.PostController do
       {:ok, post} ->
         render conn, "show.html", post: post
       :not_found ->
-        conn |> put_status(:not_found) |> render(ErrorView, "404.html")
+        conn |> put_status(:not_found) |> put_view(ErrorView) |> render("404.html")
     end
+  end
+
+  def tag(conn, params) do
+    page = Map.get(params, "page", "0") |> String.to_integer
+    {tmpl, headline, {:ok, posts}} = case params do
+      %{"category" => category} ->
+        {"list", "posts by category", Repo.get_by_category(category) |> Repo.page(page)}
+    end
+
+    render conn, "#{tmpl}.html", headline: headline, posts: posts
   end
 end
