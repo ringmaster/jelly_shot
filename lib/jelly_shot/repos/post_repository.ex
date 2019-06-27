@@ -7,9 +7,9 @@ defmodule JellyShot.PostRepository do
   def start_link(source) do
     use JellyShot.Watcher, [module: __MODULE__, source: source]
 
-    :ets.new(:posts, [:ordered_set, :protected, :named_table])
-    :ets.new(:categories, [:bag, :protected, :named_table])
-    :ets.new(:authors, [:bag, :protected, :named_table])
+    :ets.new(:posts, [:ordered_set, :public, :named_table])
+    :ets.new(:categories, [:bag, :public, :named_table])
+    :ets.new(:authors, [:bag, :public, :named_table])
 
     source
       |> get_initial_state
