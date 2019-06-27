@@ -10,6 +10,7 @@ defmodule JellyShot.PostRepository do
     :ets.new(:posts, [:ordered_set, :public, :named_table])
     :ets.new(:categories, [:bag, :public, :named_table])
     :ets.new(:authors, [:bag, :public, :named_table])
+    :ets.new(:files, [:bag, :public, :named_table])
 
     source
       |> get_initial_state
@@ -78,6 +79,16 @@ defmodule JellyShot.PostRepository do
       |> (fn(a) -> {:ok, a} end).()
   end
 
+  def get_by_filename(filename) do
+    :ets.match(:files, {filename, :"$1"})
+      |> List.flatten
+      |> Enum.map(fn(dateslug) ->
+        [{_, post} | _] = :ets.lookup(:posts, dateslug) |> List.flatten
+        post
+      end)
+      |> (fn(a) -> {:ok, a} end).()
+  end
+
   def upsert_by_file_name(file_name) do
     case Post.transform(file_name) do
       {:ok, post} ->
@@ -86,8 +97,12 @@ defmodule JellyShot.PostRepository do
     end
   end
 
+  def date_slug(post) do
+    {NaiveDateTime.to_erl(post.date), post.slug}
+  end
+
   def upsert_by_post(post) do
-    date_slug = {NaiveDateTime.to_erl(post.date), post.slug}
+    date_slug = date_slug(post)
     :ets.insert(:posts, {date_slug, post})
     post.categories
       |> Enum.each(fn(category) ->
@@ -97,16 +112,14 @@ defmodule JellyShot.PostRepository do
       |> Enum.each(fn(author) ->
         :ets.insert(:authors, {author, date_slug})
       end)
+    :ets.insert(:files, {post.file_name, date_slug})
     post
   end
 
   def delete_by_file_name(file_name) do
-    Agent.update(__MODULE__, fn posts ->
-      case Enum.find_index(posts, &(Path.relative_to_cwd(&1.file_name) == Path.relative_to_cwd(file_name))) do
-        nil -> posts
-        idx -> List.delete_at(posts, idx)
-      end
-    end)
+    post_slug = file_name |> get_by_filename() |> date_slug()
+    :ets.delete(:posts, post_slug)
+    # Need to figure out how to remove the values from :categories, :authors, and :files
   end
 
   defp read_all_posts(source) do
