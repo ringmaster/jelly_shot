@@ -25,6 +25,7 @@ defmodule JellyShot.Router do
     get "/pages/:slug", PageController, :show
 
     get "/_webhook", WebhookController, :fire
+    post "/_webhook", WebhookController, :fire
 
     # Should get rid of this stuff that is plaguing Asymptomatic
     get "/:postid/:hash/redirect", PageController, :fourohfour
