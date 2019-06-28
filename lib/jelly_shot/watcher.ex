@@ -41,6 +41,7 @@ defmodule JellyShot.Watcher do
         :removed in events -> module.delete_by_file_name(path)
         :created in events -> module.anew(source)
         :renamed in events -> module.anew(source)
+        true -> Enum.each(events, fn(event) -> Logger.info("Didn't handle file event " <> to_string(event)) end )
       end
     else
       Logger.info("The unchecked path is #{path}")
