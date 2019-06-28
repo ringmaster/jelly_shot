@@ -12,16 +12,7 @@ defmodule JellyShot.PostRepository do
     :ets.new(:authors, [:bag, :public, :named_table])
     :ets.new(:files, [:bag, :public, :named_table])
 
-    source
-      |> get_initial_state
-      |> Enum.each(fn(item) ->
-        item = if Enum.count(item.categories) == 0 do
-          Map.put(item, :categories, ["untagged"])
-        else
-          item
-        end
-        upsert_by_post(item)
-      end)
+    source |> get_initial_state
 
     Agent.start_link(fn -> "table" end, name: __MODULE__)
   end
@@ -102,6 +93,12 @@ defmodule JellyShot.PostRepository do
   end
 
   def upsert_by_post(post) do
+    Logger.debug("Upserting #{post.slug} from #{post.file_name}")
+    post = if Enum.count(post.categories) == 0 do
+      Map.put(post, :categories, ["untagged"])
+    else
+      post
+    end
     date_slug = date_slug(post)
     :ets.insert(:posts, {date_slug, post})
     post.categories
@@ -118,6 +115,7 @@ defmodule JellyShot.PostRepository do
 
   def delete_by_file_name(file_name) do
     post_slug = file_name |> get_by_filename() |> date_slug()
+    Logger.debug("Deleting #{post_slug} from deleted file #{file_name}")
     :ets.delete(:posts, post_slug)
     # Need to figure out how to remove the values from :categories, :authors, and :files
   end
@@ -131,7 +129,8 @@ defmodule JellyShot.PostRepository do
       |> Flow.map(&Post.transform/1)
       |> Flow.partition
       |> Flow.reduce(fn -> [] end, &valid_into_list/2)
-      |> Enum.sort(&sort/2)
+      |> Flow.each(&upsert_by_post/1)
+      # |> Enum.sort(&sort/2)
   end
 
   defp get_initial_state(source) do
